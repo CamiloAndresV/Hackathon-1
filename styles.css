@@ -1,11 +1,752 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ==========================================
+   Colombia en un plato
+   Rediseño completo (se carga después de Bootstrap)
+   No requiere cambios en el HTML
+   ========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&display=swap');
+@import url('https://rsms.me/inter/inter.css');
+
+/* ---------- Variables ---------- */
+:root {
+    --crema: #FFF8E9;
+    --crema-oscuro: #FBEFD0;
+    --azul: #174A78;
+    --azul-oscuro: #0E3355;
+    --amarillo: #F5B82E;
+    --rojo: #C83D35;
+    --cafe: #34251F;
+    --borde: #E6D5AE;
+
+    --radio: 18px;
+    --sombra-suave: 0 4px 14px rgba(52, 37, 31, 0.08);
+    --sombra: 0 14px 34px rgba(52, 37, 31, 0.16);
+
+    /* Franja con los colores de la bandera, se reutiliza en varios sitios */
+    --bandera: linear-gradient(90deg, var(--amarillo) 0 50%, var(--azul) 50% 75%, var(--rojo) 75% 100%);
+
+    --fuente-titulos: 'Fraunces', Georgia, serif;
+
+    --bs-body-bg: var(--crema);
+    --bs-body-color: var(--cafe);
+    --bs-body-font-family: 'Inter', system-ui, sans-serif;
+    --bs-heading-color: var(--azul);
+    --bs-link-color: var(--azul);
+    --bs-link-hover-color: var(--rojo);
+    --bs-border-color: var(--borde);
+}
+
+/* ---------- Base ---------- */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    line-height: 1.65;
+    font-size: 1rem;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: var(--fuente-titulos);
+    font-weight: 700;
+    letter-spacing: -0.01em;
 }
 
 img {
     max-width: 100%;
-    height: auto;
-    width: 18%;
+}
+
+::selection {
+    background: var(--amarillo);
+    color: var(--cafe);
+}
+
+section {
+    scroll-margin-top: 96px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--amarillo);
+    outline-offset: 2px;
+}
+
+/* Contenedor principal un poco más ancho en pantallas grandes */
+@media (min-width: 1400px) {
+    main.container {
+        max-width: 1240px;
+    }
+}
+
+/* ---------- Botones ---------- */
+
+.btn {
+    border-radius: 999px;
+    font-weight: 600;
+    padding-inline: 1.4rem;
+    transition: transform 0.15s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+/* Principal (amarillo). El de "Subir" del footer usa el mismo estilo */
+.btn-success,
+footer .btn-dark {
+    --bs-btn-color: var(--cafe);
+    --bs-btn-bg: var(--amarillo);
+    --bs-btn-border-color: var(--amarillo);
+    --bs-btn-hover-color: var(--cafe);
+    --bs-btn-hover-bg: #ffc94d;
+    --bs-btn-hover-border-color: #ffc94d;
+    --bs-btn-active-color: var(--cafe);
+    --bs-btn-active-bg: #e3a51a;
+    --bs-btn-active-border-color: #e3a51a;
+    --bs-btn-disabled-color: var(--cafe);
+    --bs-btn-disabled-bg: var(--amarillo);
+    --bs-btn-disabled-border-color: var(--amarillo);
+    --bs-btn-focus-shadow-rgb: 245, 184, 46;
+    box-shadow: 0 6px 16px rgba(245, 184, 46, 0.35);
+}
+
+.btn-danger {
+    --bs-btn-bg: var(--rojo);
+    --bs-btn-border-color: var(--rojo);
+    --bs-btn-hover-bg: #a8312b;
+    --bs-btn-hover-border-color: #a8312b;
+    --bs-btn-active-bg: #8f2824;
+    --bs-btn-active-border-color: #8f2824;
+    --bs-btn-focus-shadow-rgb: 200, 61, 53;
+}
+
+.btn-secondary,
+.btn-primary {
+    --bs-btn-bg: var(--azul);
+    --bs-btn-border-color: var(--azul);
+    --bs-btn-hover-bg: var(--azul-oscuro);
+    --bs-btn-hover-border-color: var(--azul-oscuro);
+    --bs-btn-active-bg: #0a2640;
+    --bs-btn-active-border-color: #0a2640;
+    --bs-btn-focus-shadow-rgb: 23, 74, 120;
+}
+
+.btn-outline-danger {
+    --bs-btn-color: var(--rojo);
+    --bs-btn-border-color: var(--rojo);
+    --bs-btn-hover-bg: var(--rojo);
+    --bs-btn-hover-border-color: var(--rojo);
+    --bs-btn-active-bg: #a8312b;
+    --bs-btn-active-border-color: #a8312b;
+}
+
+footer .btn-dark::before {
+    content: "↑ ";
+}
+
+/* ---------- Navbar ---------- */
+
+/* Vidrio esmerilado sobre la crema; pisa bg-light de Bootstrap */
+.navbar.bg-light,
+.navbar.bg-body-tertiary {
+    background-color: rgba(255, 248, 233, 0.88) !important;
+    -webkit-backdrop-filter: saturate(160%) blur(12px);
+    backdrop-filter: saturate(160%) blur(12px);
+}
+
+.navbar {
+    --bs-navbar-color: var(--cafe);
+    --bs-navbar-hover-color: var(--azul);
+    --bs-navbar-active-color: #fff;
+    padding-block: 0.7rem;
+    border-bottom: 0;
+    box-shadow: 0 2px 18px rgba(52, 37, 31, 0.1) !important;
+    position: sticky;
+}
+
+/* Franja tricolor debajo del navbar */
+.navbar::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4px;
+    background: var(--bandera);
+}
+
+.navbar > .container-fluid {
+    padding-inline: clamp(1rem, 4vw, 3rem);
+}
+
+.navbar-brand img {
+    height: 64px;
+    width: auto;
+    transition: transform 0.3s;
+}
+
+.navbar-brand:hover img {
+    transform: rotate(-6deg) scale(1.06);
+}
+
+.navbar .navbar-nav {
+    gap: 0.35rem;
+    align-items: center;
+}
+
+.navbar .navbar-nav .nav-link {
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.5rem 1.15rem;
+    border-radius: 999px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.navbar .navbar-nav .nav-link:hover {
+    background-color: var(--crema-oscuro);
+}
+
+.navbar .navbar-nav .nav-link.active {
+    background-color: var(--azul);
+    color: #fff;
+}
+
+/* El carrito se ve como botón amarillo */
+.navbar .navbar-nav .nav-link.fw-bold {
+    background-color: var(--amarillo);
+    color: var(--cafe);
+    box-shadow: 0 4px 12px rgba(245, 184, 46, 0.4);
+    margin-left: 0.4rem;
+}
+
+.navbar .navbar-nav .nav-link.fw-bold:hover {
+    background-color: #ffc94d;
+    color: var(--cafe);
+}
+
+#contador-carrito {
+    --bs-secondary-rgb: 200, 61, 53;
+    font-size: 0.8rem;
+    min-width: 1.5rem;
+    padding: 0.3em 0.5em;
+    border-radius: 999px;
+}
+
+.navbar-toggler {
+    border: 2px solid var(--azul);
+    border-radius: 12px;
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(245, 184, 46, 0.5);
+}
+
+/* Menú desplegado en celular */
+@media (max-width: 991.98px) {
+    .navbar .navbar-collapse {
+        padding: 1rem 0 0.5rem;
+    }
+
+    .navbar .navbar-nav {
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .navbar .navbar-nav .nav-link.fw-bold {
+        margin-left: 0;
+    }
+}
+
+/* ---------- Hero / carrusel ---------- */
+
+#inicio {
+    position: relative;
+    background: var(--azul-oscuro) !important;
+}
+
+#carousel img {
+    height: 72vh;
+    min-height: 380px;
+    max-height: 640px;
+    object-fit: cover;
+    filter: saturate(1.1) contrast(1.03);
+}
+
+/* Degradado oscuro arriba para el navbar y fundido a crema abajo
+   para que la tarjeta de bienvenida "flote" sobre la foto */
+#inicio::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(to bottom, rgba(14, 51, 85, 0.35) 0%, rgba(14, 51, 85, 0) 35%),
+        linear-gradient(to top, var(--crema) 0%, rgba(255, 248, 233, 0) 28%);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(52, 37, 31, 0.55);
+    border-radius: 50%;
+    padding: 1.1rem;
+    background-size: 50%;
+}
+
+/* ---------- Contenido principal ---------- */
+
+main.container {
+    margin-top: 0 !important; /* anula mt-5: la tarjeta sube sobre el hero */
+    padding-bottom: 2rem;
+}
+
+/* ---------- Presentación (tarjeta flotante sobre el hero) ---------- */
+
+.presentacion {
+    position: relative;
+    z-index: 3;
+    margin-top: -130px;
+    margin-bottom: 4rem !important;
+    padding: 3.2rem 1.5rem 3rem;
+    background: #fff;
+    border: 1px solid var(--borde);
+    border-radius: 28px;
+    box-shadow: var(--sombra);
+    overflow: hidden;
+}
+
+.presentacion::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: var(--bandera);
+}
+
+.presentacion h2 {
+    font-size: clamp(1.9rem, 4.5vw, 3rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 1rem !important;
+}
+
+.presentacion p {
+    max-width: 620px;
+    margin: 0 auto;
+    font-size: 1.15rem;
+    opacity: 0.85;
+}
+
+.presentacion .btn-lg {
+    padding: 0.85rem 2.4rem;
+    font-size: 1.1rem;
+    margin-top: 1.5rem !important;
+}
+
+/* ---------- Catálogo ---------- */
+
+.catalogo h2 {
+    position: relative;
+    font-size: clamp(1.7rem, 3.5vw, 2.3rem);
+    font-weight: 800;
+    border-bottom: 0 !important;
+    padding-bottom: 1rem !important;
+    margin-bottom: 1.8rem !important;
+}
+
+/* Barra amarilla corta en lugar de la línea gris */
+.catalogo h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 72px;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--amarillo);
+}
+
+.card {
+    --bs-card-bg: #fff;
+    --bs-card-border-color: transparent;
+    --bs-card-border-radius: var(--radio);
+    --bs-card-inner-border-radius: var(--radio);
+    --bs-card-cap-bg: var(--crema);
+    box-shadow: var(--sombra-suave);
+}
+
+#catalogo-productos .card {
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid var(--borde);
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+#catalogo-productos .card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--sombra);
+}
+
+#catalogo-productos .card img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+#catalogo-productos .card:hover img {
+    transform: scale(1.07);
+}
+
+#catalogo-productos .card-body {
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 1.3rem 1.4rem;
+}
+
+/* El botón queda siempre abajo aunque las descripciones midan distinto */
+#catalogo-productos .card-body .btn {
+    margin-top: auto;
+}
+
+.card-title {
+    font-family: var(--fuente-titulos);
+    color: var(--azul);
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.card-text {
+    font-size: 0.95rem;
+    opacity: 0.8;
+}
+
+.precio {
+    color: var(--rojo);
+    font-weight: 800;
+    font-size: 1.3rem;
+}
+
+.precio-original {
+    text-decoration: line-through;
+    opacity: 0.5;
+    font-size: 0.9rem;
+}
+
+.oferta {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    background-color: var(--rojo);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+/* ---------- Carrito ---------- */
+
+.carrito > div {
+    --bs-light-rgb: 255, 255, 255;
+    --bs-border-color: var(--borde);
+    --bs-border-width: 1px;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radio) !important;
+    padding: 1.5rem !important;
+    box-shadow: var(--sombra);
+}
+
+.carrito > div::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--bandera);
+}
+
+.carrito h4 {
+    margin-top: 0.4rem;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+#carrito-contenido {
+    max-height: 48vh;
+    overflow-y: auto;
+    padding-right: 0.25rem;
+}
+
+#carrito-contenido > div {
+    padding: 0.65rem 0;
+    border-bottom: 1px dashed var(--borde);
+}
+
+#carrito-contenido > div:last-child {
+    border-bottom: none;
+}
+
+#carrito-contenido .btn {
+    --bs-btn-padding-y: 0.15rem;
+    --bs-btn-padding-x: 0.6rem;
+    --bs-btn-font-size: 0.85rem;
+}
+
+#carrito-contenido::-webkit-scrollbar {
+    width: 6px;
+}
+
+#carrito-contenido::-webkit-scrollbar-thumb {
+    background: var(--borde);
+    border-radius: 3px;
+}
+
+.carrito hr {
+    border-color: var(--borde);
+    opacity: 1;
+}
+
+.carrito .fs-5 {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+#precio-total {
+    color: var(--rojo);
+    font-family: var(--fuente-titulos);
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+
+.carrito .btn {
+    padding-block: 0.65rem;
+}
+
+@media (min-width: 992px) {
+    .carrito > div {
+        position: sticky;
+        top: 110px;
+    }
+}
+
+/* ---------- Contacto ---------- */
+
+.contacto {
+    padding-block: 3rem !important;
+}
+
+.contacto .row {
+    --bs-light-rgb: 251, 239, 208;
+    border: 0 !important;
+    border-radius: 28px !important;
+    padding: 1.2rem !important;
+    box-shadow: var(--sombra);
+}
+
+/* Columna de información convertida en panel azul */
+.contacto .col-md-5 {
+    background: linear-gradient(160deg, var(--azul) 0%, var(--azul-oscuro) 100%);
+    color: var(--crema);
+    border-radius: 20px;
+    padding: 2.2rem !important;
+}
+
+.contacto .col-md-5 h3 {
+    color: var(--amarillo);
+    font-size: 1.9rem;
+}
+
+.contacto .col-md-5 .text-muted {
+    color: rgba(255, 248, 233, 0.8) !important;
+}
+
+.contacto .col-md-5 strong {
+    display: block;
+    color: var(--amarillo);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.1rem;
+}
+
+.contacto .card {
+    --bs-card-bg: #fff;
+    border-radius: 20px;
+}
+
+.contacto .card h4 {
+    font-size: 1.5rem;
+}
+
+.form-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.form-control {
+    background-color: var(--crema);
+    border: 1.5px solid var(--borde);
+    border-radius: 12px;
+    padding: 0.7rem 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.form-control:focus {
+    background-color: #fff;
+    border-color: var(--azul);
+    box-shadow: 0 0 0 0.25rem rgba(23, 74, 120, 0.18);
+}
+
+.contacto form .btn {
+    padding-block: 0.8rem;
+}
+
+/* ---------- Footer ---------- */
+
+footer {
+    --bs-heading-color: var(--crema);
+    --bs-secondary-rgb: 255, 248, 233;
+    --bs-text-opacity: 0.8;
+    position: relative;
+    margin-top: 4rem !important;
+    padding-top: 3.5rem !important;
+    padding-bottom: 2rem !important;
+}
+
+footer.bg-dark {
+    background: linear-gradient(180deg, var(--azul) 0%, var(--azul-oscuro) 100%) !important;
+}
+
+footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--bandera);
+}
+
+footer h5 {
+    position: relative;
+    color: var(--crema);
+    font-size: 1.2rem;
+    padding-bottom: 0.7rem;
+}
+
+footer h5::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 36px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--amarillo);
+}
+
+footer a {
+    color: var(--amarillo);
+}
+
+footer a:hover {
+    color: #fff;
+}
+
+footer hr {
+    opacity: 0.25;
+}
+
+/* ---------- Alertas ---------- */
+
+.alert-success {
+    --bs-alert-bg: #fff3cf;
+    --bs-alert-border-color: var(--amarillo);
+    --bs-alert-color: var(--cafe);
+    border-radius: 12px;
+}
+
+.alert-danger {
+    --bs-alert-bg: #fbe4e2;
+    --bs-alert-border-color: var(--rojo);
+    --bs-alert-color: #7a1f1a;
+    border-radius: 12px;
+}
+
+/* ---------- Celular y tablet ---------- */
+
+@media (max-width: 991.98px) {
+    .presentacion {
+        margin-top: -90px;
+    }
+}
+
+@media (max-width: 768px) {
+    #carousel img {
+        height: 46vh;
+        min-height: 280px;
+    }
+
+    .presentacion {
+        margin-top: -60px;
+        padding: 2.4rem 1.2rem 2.2rem;
+        border-radius: 22px;
+    }
+
+    #catalogo-productos .card img {
+        height: 180px;
+    }
+
+    .contacto .row {
+        padding: 0.8rem !important;
+    }
+
+    .contacto .col-md-5 {
+        padding: 1.6rem !important;
+    }
+
+    #carrito-contenido {
+        max-height: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar-brand img {
+        height: 50px;
+    }
+
+    .presentacion p {
+        font-size: 1rem;
+    }
+}
+
+/* Respeta a quien tiene las animaciones desactivadas */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+    }
 }
