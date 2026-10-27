@@ -31,3 +31,12 @@ La plataforma cuenta con un catálogo dinámico y un **carrito de compras persis
 * **HTML5:** Estructura semántica de la landing page.
 * **CSS3:** Estilos personalizados, diseño adaptativo (Flexbox / Grid) y animaciones.
 * **JavaScript (ES6+):** Lógica del carrito de compras, manipulación del DOM y manejo de `localStorage` para la persistencia.
+
+---
+
+## 👤👤👤 Equipo 11
+
+* Cristian David Valencia Mora
+* Soranny Cuesta Murillo
+* Mateo Valencia Jimenez
+* Camilo Andrés Ospina Villa
