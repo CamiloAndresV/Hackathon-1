@@ -78,7 +78,7 @@ function agregarProductos(productos) {
 
 
         //hacer q el btn funcione 
-        //btnAgregar.addEventListener("click", )//carrito de compra));  
+        btnAgregar.addEventListener("click", )//carrito de compra));  
 
     }
 }
