@@ -188,6 +188,10 @@ botonComprar.addEventListener("click", function () {
 
     carrito = [];
     actualizarCarrito();
+
+    // El modal solo se abre si de verdad había platos en el carrito
+    const modalCompra = document.querySelector("#staticBackdrop");
+    bootstrap.Modal.getOrCreateInstance(modalCompra).show();
 });
 
 

@@ -304,6 +304,32 @@ footer .btn-dark::before {
     background-size: 50%;
 }
 
+/* Indicadores del carrusel: subidos para que no los tape la tarjeta de bienvenida */
+#carousel .carousel-indicators {
+    bottom: 150px;
+    z-index: 4;
+}
+
+#carousel .carousel-indicators [data-bs-target] {
+    width: 34px;
+    height: 5px;
+    border: 0;
+    border-radius: 3px;
+    background-color: #fff;
+    opacity: 0.55;
+}
+
+#carousel .carousel-indicators .active {
+    background-color: var(--amarillo);
+    opacity: 1;
+}
+
+#carousel .carousel-control-prev,
+#carousel .carousel-control-next {
+    z-index: 4;
+    width: 8%;
+}
+
 /* ---------- Contenido principal ---------- */
 
 main.container {
@@ -749,4 +775,138 @@ footer hr {
         transition: none !important;
         animation: none !important;
     }
+}
+
+/* ==========================================
+   Ajustes para el HTML que genera el JS
+   (tarjetas de productos, items del carrito y modal)
+   ========================================== */
+
+/* Tarjetas: el JS crea h4 + p + p + badge + botón */
+#catalogo-productos .card-body h4 {
+    font-family: var(--fuente-titulos);
+    color: var(--azul);
+    font-size: 1.25rem;
+    margin-bottom: 0.4rem;
+}
+
+#catalogo-productos .card-body p {
+    font-size: 0.95rem;
+    opacity: 0.8;
+    margin-bottom: 0.6rem;
+}
+
+/* El segundo <p> es el precio */
+#catalogo-productos .card-body p:nth-of-type(2) {
+    color: var(--rojo);
+    font-weight: 800;
+    font-size: 1.3rem;
+    opacity: 1;
+}
+
+/* La etiqueta de región no se estira a todo el ancho */
+#catalogo-productos .card-body .badge {
+    align-self: flex-start;
+    padding: 0.4em 0.9em;
+    border-radius: 999px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.badge.text-bg-primary {
+    background-color: var(--azul) !important;
+    color: #fff !important;
+}
+
+/* El botón queda abajo; !important porque la clase mt-3 de Bootstrap también lo es */
+#catalogo-productos .card-body .btn {
+    margin-top: auto !important;
+}
+
+#catalogo-productos .card-body .badge + .btn {
+    margin-top: 1rem !important;
+}
+
+/* Items del carrito */
+#carrito-contenido .plato {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.35rem 0.75rem;
+    align-items: center;
+}
+
+.plato-nombre {
+    grid-column: 1;
+    font-weight: 600;
+    color: var(--azul);
+}
+
+.plato-subtotal {
+    grid-column: 2;
+    text-align: right;
+    font-weight: 700;
+    color: var(--rojo);
+}
+
+.cantidad {
+    grid-column: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 600;
+}
+
+.cantidad button {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1.5px solid var(--borde);
+    background: var(--crema);
+    color: var(--azul);
+    font-weight: 700;
+    line-height: 1;
+    transition: background-color 0.2s;
+}
+
+.cantidad button:hover {
+    background: var(--amarillo);
+}
+
+.quitar {
+    grid-column: 2;
+    justify-self: end;
+    border: 0;
+    background: none;
+    padding: 0;
+    color: var(--rojo);
+    font-size: 0.85rem;
+    text-decoration: underline;
+}
+
+.quitar:hover {
+    color: #8f2824;
+}
+
+.vacio {
+    margin: 0;
+    opacity: 0.7;
+}
+
+/* Modal de compra */
+.modal-content {
+    border: 0;
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    overflow: hidden;
+}
+
+.modal-header,
+.modal-footer {
+    border-color: var(--borde);
+}
+
+.modal-title {
+    font-family: var(--fuente-titulos);
+    color: var(--azul);
 }
