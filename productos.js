@@ -12,11 +12,11 @@ const productos = [
     { id: 9, nombre: "Pirarucú", descripcion: "Pescado amazónico preparado asado, frito o en guisos", precio: 30000, region: "Amazónica", imagen: "./img-productos/Pirarucú.jpg" },
     { id: 10, nombre: "Patarasca de pescado", descripcion: "Pescado amazónico sazonado, envuelto en hojas y cocinado al fuego", precio: 28000, region: "Amazónica", imagen: "./img-productos/Patarascadepescado.jpg" },
     { id: 11, nombre: "Rondón", descripcion: "Preparación de pescado o mariscos con leche de coco, tubérculos y otros ingredientes", precio: 32000, region: "Insular", imagen: "./img-productos/rondón.jpg" },
-    { id: 12, nombre: "Rice and beans", descripcion: "Arroz con fríjoles preparado con leche de coco y condimentos", precio: 20000, region: "Insular",region: "Insular", imagen: "./img-productos/Riceandbeans.jpg" },
+    { id: 12, nombre: "Rice and beans", descripcion: "Arroz con fríjoles preparado con leche de coco y condimentos", precio: 20000, region: "Insular", imagen: "./img-productos/riceeandbeanss.jpg" },
 ];
 
 function agregarProductos(productos) {
-    let catalogoProductos = document.getElementById("catalogo-productos")
+    let catalogoProductos = document.getElementById("catalogo-productos")   
     catalogoProductos.innerHTML = ""
     for (let i = 0; i < productos.length; i++) {
         let productoActual = productos[i]
@@ -24,7 +24,7 @@ function agregarProductos(productos) {
         let columna = document.createElement("div")
         columna.classList.add("col-12", "col-md-6")
         let tarjeta = document.createElement("div")
-        tarjeta.classList.add("card")
+        tarjeta.classList.add("card","h-100")
         let bodyTarjeta = document.createElement("div")
         bodyTarjeta.classList.add("card-body")
 
@@ -34,12 +34,21 @@ function agregarProductos(productos) {
         let descripcionProducto = document.createElement("p")
         descripcionProducto.textContent = productoActual.descripcion
         let precioProducto = document.createElement("p")
-        precioProducto.textContent = productoActual.precio
+        precioProducto.textContent = `$ ${productoActual.precio.toLocaleString("es-CO")}`
+        
 
         //agregar al html en el cuerpo de la tarjeta
         bodyTarjeta.appendChild(nombreProducto);
         bodyTarjeta.appendChild(descripcionProducto);
         bodyTarjeta.appendChild(precioProducto);
+
+        //agregar imagen representativa
+        let imagenComida=document.createElement("img")
+        imagenComida.src=productoActual.imagen
+        imagenComida.classList.add("card-img-top","img-fluid")
+
+        //agregar a la tarjeta fuera del body paq se vea clean
+        tarjeta.appendChild(imagenComida)
 
         //agregar al html el cuerpo a la tarjeta
         tarjeta.appendChild(bodyTarjeta)
@@ -49,6 +58,15 @@ function agregarProductos(productos) {
 
         //agregar al html la columna al catalogo
         catalogoProductos.appendChild(columna)
+
+        //agregar etiquieta por region
+        let etiquetaRegion = document.createElement("span")
+        etiquetaRegion.textContent = productoActual.region
+        etiquetaRegion.classList.add("badge", "text-bg-primary", "mb-2")
+
+        //agregar la region a la tarjeta
+        bodyTarjeta.appendChild(etiquetaRegion)
+
 
         // ahora agregar el botón que si lo lleve al carrito
         let btnAgregar = document.createElement("button")
@@ -60,23 +78,7 @@ function agregarProductos(productos) {
 
 
         //hacer q el btn funcione 
-        //btnAgregar.addEventListener("click", )//carrito de compra));  
-
-        //agregar etiquieta por region
-        let etiquetaRegion = document.createElement("span")
-        etiquetaRegion.textContent = productoActual.region
-        etiquetaRegion.classList.add("badge", "text-bg-primary", "mb-2")
-
-        //agregar la region a la tarjeta
-        bodyTarjeta.appendChild(etiquetaRegion)
-
-        //agregar imagen representativa
-        let imagenComida=document.createElement("img")
-        imagenComida.src=productoActual.imagen
-
-        //agregar a la tarjeta fuera del body paq se vea clean
-        tarjeta.appendChild(imagenComida)
-
+        btnAgregar.addEventListener("click", )//carrito de compra));  
 
     }
 }
