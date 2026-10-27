@@ -70,15 +70,14 @@ function agregarProductos(productos) {
 
         // ahora agregar el botón que si lo lleve al carrito
         let btnAgregar = document.createElement("button")
+        btnAgregar.type = "button"
         btnAgregar.textContent = "Añadir al carrito"
         btnAgregar.classList.add("btn", "btn-success", "w-100", "mt-3")
+        btnAgregar.dataset.accion = "agregar"
+        btnAgregar.dataset.id = productoActual.id
 
         //agregar el btn a la tarjeta
         bodyTarjeta.appendChild(btnAgregar)
-
-
-        //hacer q el btn funcione 
-        btnAgregar.addEventListener("click", )//carrito de compra));  
 
     }
 }
