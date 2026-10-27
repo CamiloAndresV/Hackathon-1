@@ -186,7 +186,6 @@ botonComprar.addEventListener("click", function () {
         return;
     }
 
-    alert("¡Compra realizada!");
     carrito = [];
     actualizarCarrito();
 });

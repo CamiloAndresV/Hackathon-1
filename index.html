@@ -44,7 +44,7 @@
 
     <!-- Encabezado carrusel -->
     <header id="inicio" class="bg-light text-center">
-        <div id="carousel" class="carousel slide carousel-fade mx-auto" data-bs-ride="carousel">
+        <div id="carousel" class="carousel slide carousel-fade mx-auto" data-bs-interval="3000" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="https://cdn.colombia.com/gastronomia/2011/08/02/bandeja-paisa-1616.webp"
@@ -104,7 +104,33 @@
                     <!-- Resumen y acciones -->
                     <p class="fs-5"><strong>Total:</strong> <span id="precio-total">$0</span></p>
                     <button id="btn-vaciar" class="btn btn-danger w-100 mb-2">Vaciar Carrito</button>
-                    <button id="btn-comprar" class="btn btn-success w-100">Comprar</button>
+                    <!-- <button id="btn-comprar" class="btn btn-success w-100">Comprar</button> -->
+                    
+                    <!-- Boton modal -->
+                    <button id="btn-comprar" type="button" class="btn btn-success w-100" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">
+                        Comprar
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Pedido Realizado</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Compra realizada con éxito. ¡Gracias por tu pedido!
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Entendido</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
